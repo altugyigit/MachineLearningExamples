@@ -67,7 +67,13 @@ features = rgbHistObj.calculateHist(image, mask=None)
 
 flower = le.inverse_transform(model.predict(features))[0] #Burada ilk feature i isim olarak aliyor bunu integerdan ceviriyor.
 print imagePath
-print "I think this flower is a %s" % (flower.upper())
+
+if flower == 'crocus' : flower = 'cigdem'
+if flower == 'daisy' : flower = 'papatya'
+if flower == 'pansy' : flower = 'menekse'
+if flower == 'sunflower' : flower = 'aycicegi'
+
+print "Bu cicek %s olabilir." % (flower.upper())
 
 
 
