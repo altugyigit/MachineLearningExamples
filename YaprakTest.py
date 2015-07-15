@@ -7,13 +7,13 @@ from TrainClassify import TrainClassify
 import cv2
 import glob
 
-#Oncelikle egitim yapilmali.
-imagePaths = sorted(glob.glob("dataset/images" + "/*.png"))
+#****************************************************YAPRAK EGITIM***************************************************************
+imagePaths = sorted(glob.glob("dataset/images" + "/*.png"))#YAPRAK Pathi verilecek.
 maskPaths = sorted(glob.glob("dataset/masks" + "/*.png"))
 
 trainObj = TrainClassify(imagePaths, maskPaths)
 
-#****************************************************TEST***************************************************************
+#****************************************************YAPRAK TEST***************************************************************
 imagePath = 'testimg.jpg'
 image = cv2.imread(imagePath)
 
