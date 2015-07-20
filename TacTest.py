@@ -8,13 +8,13 @@ import cv2
 import glob
 
 #****************************************************TAC EGITIM***************************************************************
-imagePaths = sorted(glob.glob("dataset/images" + "/*.png"))
+imagePaths = sorted(glob.glob("dataset/hanimeli" + "/*.jpg"))
 maskPaths = sorted(glob.glob("dataset/masks" + "/*.png"))
 
 trainObj = TrainClassify(imagePaths, maskPaths)
 
 #****************************************************TAC TEST***************************************************************
-imagePath = 'testimg.jpg'
+imagePath = 'testimgh.jpg'
 image = cv2.imread(imagePath)
 
 rgbHistObj = RGBHistogram([8, 8, 8])
@@ -24,8 +24,8 @@ flower = trainObj.le.inverse_transform(trainObj.model.predict(features))[0] #Bur
 
 print imagePath
 
-if flower == 'crocus' : flower = 'cigdem'
-if flower == 'daisy' : flower = 'papatya'
+if flower == 'crocus': flower = 'cigdem'
+if flower == 'daisy': flower = 'papatya'
 if flower == 'pansy' : flower = 'menekse'
 if flower == 'sunflower' : flower = 'aycicegi'
 
