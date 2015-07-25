@@ -1,5 +1,6 @@
 __author__ = 'altug'
 
+from Adaptive import Adaptive
 from RGBHistogram import RGBHistogram
 from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
@@ -25,11 +26,13 @@ class TrainClassify:
         target = []
 
         rgbHistObj = RGBHistogram([8, 8, 8])
+        adaptiveObj = Adaptive()
         i=1
         for imagePath in imagePaths:
             image = cv2.imread(imagePath)
             #mask = cv2.imread(maskPath)
             #mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
+            #threshImage = adaptiveObj.getThresh(maskPath)
             print '->'+str(i)
             i=i+1
             features = rgbHistObj.calculateHist(image, mask=None)#Maskta size hatasi veriyor none yaptim.

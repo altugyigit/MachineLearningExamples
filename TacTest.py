@@ -25,7 +25,7 @@ image = cv2.imread(imagePath)
 threshImage = adaptiveObj.getThresh(imagePath)
 convertedThresh = cv2.cvtColor(threshImage, cv2.COLOR_GRAY2BGR)
 rgbHistObj = RGBHistogram([8, 8, 8])
-features = rgbHistObj.calculateHist(image, mask=None)
+features = rgbHistObj.calculateHist(image, convertedThresh)
 
 flower = trainObj.le.inverse_transform(trainObj.model.predict(features))[0] #Burada ilk feature i isim olarak aliyor bunu integerdan ceviriyor.
 print np.shape(convertedThresh)
