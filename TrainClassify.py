@@ -25,14 +25,14 @@ class TrainClassify:
         target = []
 
         rgbHistObj = RGBHistogram([8, 8, 8])
-
-        for (imagePath, maskPath) in zip(imagePaths, maskPaths):
+        i=1
+        for imagePath in imagePaths:
             image = cv2.imread(imagePath)
-            mask = cv2.imread(maskPath)
-            mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
-
-            features = rgbHistObj.calculateHist(image, mask = None)#Maskta size hatasi veiyor none yaptim.
-
+            #mask = cv2.imread(maskPath)
+            #mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
+            print '->'+str(i)
+            i=i+1
+            features = rgbHistObj.calculateHist(image, mask=None)#Maskta size hatasi veriyor none yaptim.
             data.append(features)
             target.append(imagePath.split("_")[1])
 

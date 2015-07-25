@@ -1,6 +1,7 @@
 __author__ = 'altug'
 
 from RGBHistogram import RGBHistogram
+from Adaptive import Adaptive
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder
 from TrainClassify import TrainClassify
@@ -8,14 +9,17 @@ import cv2
 import glob
 
 #****************************************************TAC EGITIM***************************************************************
-imagePaths = sorted(glob.glob("dataset/imagesjpg" + "/*.jpg"))
-maskPaths = sorted(glob.glob("dataset/masks" + "/*.png"))
+imagePaths = sorted(glob.glob("dataset/imagesjpg2" + "/*.jpg"))
+maskPaths = sorted(glob.glob("dataset/masksjpg" + "/*.jpg"))
 
 trainObj = TrainClassify(imagePaths, maskPaths)
 
 #****************************************************TAC TEST***************************************************************
-imagePath = 'test/testimglale4.jpg'
+adaptiveObj = Adaptive()
+
+imagePath = 'test/testimgm2.jpg'
 image = cv2.imread(imagePath)
+threshImage = adaptiveObj.getThresh(imagePath)
 
 rgbHistObj = RGBHistogram([8, 8, 8])
 features = rgbHistObj.calculateHist(image, mask=None)
@@ -30,3 +34,5 @@ if flower == 'pansy' : flower = 'menekse'
 if flower == 'sunflower' : flower = 'aycicegi'
 
 print "Bu cicek %s cinsi olabilir." % (flower.upper())
+
+cv2.waitKey(0)
