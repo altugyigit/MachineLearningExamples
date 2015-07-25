@@ -8,6 +8,6 @@ class RGBHistogram:
 
     def calculateHist(self, image, mask=None):
         hist = cv2.calcHist(image, [0, 1, 2], mask, self.bins, [0, 256, 0, 256, 0, 256])
-        hist = cv2.normalize(hist)
+        hist = cv2.normalize(hist, dst=None)
 
         return hist.flatten()
