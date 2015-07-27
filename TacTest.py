@@ -10,7 +10,7 @@ import glob
 import numpy as np
 
 #****************************************************TAC EGITIM***************************************************************
-imagePaths = sorted(glob.glob("dataset/imagesjpg2" + "/*.jpg"))
+imagePaths = sorted(glob.glob("dataset/imagesjpg" + "/*.jpg"))#Egitim path i.
 maskPaths = sorted(glob.glob("dataset/masksjpg" + "/*.jpg"))
 
 trainObj = TrainClassify(imagePaths, maskPaths)
@@ -19,16 +19,16 @@ trainObj = TrainClassify(imagePaths, maskPaths)
 adaptiveObj = Adaptive()
 
 imagePath = 'test/testimgm2.jpg'
-maskedeneme = 'dataset/masks/mask_crocus_0001.png'
-maskk = cv2.imread(maskedeneme)
 image = cv2.imread(imagePath)
-threshImage = adaptiveObj.getThresh(imagePath)
-convertedThresh = cv2.cvtColor(threshImage, cv2.COLOR_GRAY2BGR)
+#threshImage = adaptiveObj.getThresh(imagePath)
+#convertedThresh = cv2.cvtColor(threshImage, cv2.COLOR_GRAY2BGR)
+#masked_img = cv2.bitwise_and(image,image,mask = threshImage)
+#cv2.imshow("asdasd", masked_img)
 rgbHistObj = RGBHistogram([8, 8, 8])
-features = rgbHistObj.calculateHist(image, convertedThresh)
+features = rgbHistObj.calculateHist(image, mask=None)
 
 flower = trainObj.le.inverse_transform(trainObj.model.predict(features))[0] #Burada ilk feature i isim olarak aliyor bunu integerdan ceviriyor.
-print np.shape(convertedThresh)
+
 print imagePath
 
 if flower == 'crocus': flower = 'cigdem'
