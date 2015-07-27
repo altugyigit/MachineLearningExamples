@@ -16,26 +16,25 @@ maskPaths = sorted(glob.glob("dataset/masksjpg" + "/*.jpg"))
 trainObj = TrainClassify(imagePaths, maskPaths)
 
 #****************************************************TAC TEST***************************************************************
-adaptiveObj = Adaptive()
+#adaptiveObj = Adaptive()
+testPaths = sorted(glob.glob("test" + "/*.jpg"))
 
-imagePath = 'test/testimgm2.jpg'
-image = cv2.imread(imagePath)
-#threshImage = adaptiveObj.getThresh(imagePath)
-#convertedThresh = cv2.cvtColor(threshImage, cv2.COLOR_GRAY2BGR)
-#masked_img = cv2.bitwise_and(image,image,mask = threshImage)
-#cv2.imshow("asdasd", masked_img)
-rgbHistObj = RGBHistogram([8, 8, 8])
-features = rgbHistObj.calculateHist(image, mask=None)
+for testPath in testPaths:
+    image = cv2.imread(testPath)
+    #threshImage = adaptiveObj.getThresh(imagePath)
+    #convertedThresh = cv2.cvtColor(threshImage, cv2.COLOR_GRAY2BGR)
+    #masked_img = cv2.bitwise_and(image,image,mask = threshImage)
+    #cv2.imshow("asdasd", masked_img)
+    rgbHistObj = RGBHistogram([8, 8, 8])
+    features = rgbHistObj.calculateHist(image, mask=None)
 
-flower = trainObj.le.inverse_transform(trainObj.model.predict(features))[0] #Burada ilk feature i isim olarak aliyor bunu integerdan ceviriyor.
+    flower = trainObj.le.inverse_transform(trainObj.model.predict(features))[0] #Burada ilk feature i isim olarak aliyor bunu integerdan ceviriyor.
 
-print imagePath
+    print testPath
 
-if flower == 'crocus': flower = 'cigdem'
-if flower == 'daisy': flower = 'papatya'
-if flower == 'pansy' : flower = 'menekse'
-if flower == 'sunflower' : flower = 'aycicegi'
+    if flower == 'crocus': flower = 'cigdem'
+    if flower == 'daisy': flower = 'papatya'
+    if flower == 'pansy' : flower = 'menekse'
+    if flower == 'sunflower' : flower = 'aycicegi'
 
-print "Bu cicek %s cinsi olabilir." % (flower.upper())
-
-cv2.waitKey(0)
+    print "Bu cicek %s cinsi olabilir." % (flower.upper())
